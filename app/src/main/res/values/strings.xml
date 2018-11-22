@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Reader</string>
+    <string name="judul_artikel">Bluetooth Overview</string>
+    <string name="subtitle_artikel">Connect as a server</string>
+    <string name="artikel_text">When you want to connect two devices, one must act as a server by holding an open BluetoothServerSocket. The purpose of the server socket is to listen for incoming connection requests and provide a connected BluetoothSocket after a request is accepted. When the BluetoothSocket is acquired from the BluetoothServerSocket, the BluetoothServerSocket can—and should—be discarded, unless you want the device to accept more connections.\n
+\n
+        www.google.com\n
+To set up a server socket and accept a connection, complete the following sequence of steps:\n
+\n
+Get a BluetoothServerSocket by calling listenUsingRfcommWithServiceRecord().\n
+The string is an identifiable name of your service, which the system automatically writes to a new Service Discovery Protocol (SDP) database entry on the device. The name is arbitrary and can simply be your application name. The Universally Unique Identifier (UUID) is also included in the SDP entry and forms the basis for the connection agreement with the client device. That is, when the client attempts to connect with this device, it carries a UUID that uniquely identifies the service with which it wants to connect. These UUIDs must match in order for the connection to be accepted.\n
+\n
+A UUID is a standardized 128-bit format for a string ID used to uniquely identify information. The point of a UUID is that it\'s big enough that you can select any random ID and it doesn\'t clash with any other ID. In this case, it\'s used to uniquely identify your application\'s Bluetooth service. To get a UUID to use with your application, you can use one of the many random UUID generators on the web, then initialize a UUID with fromString(String).\n
+Start listening for connection requests by calling accept().\n
+This is a blocking call. It returns when either a connection has been accepted or an exception has occurred. A connection is accepted only when a remote device has sent a connection request containing a UUID that matches the one registered with this listening server socket. When successful, accept() returns a connected BluetoothSocket.\n
+Unless you want to accept additional connections, call close().\n
+This method call releases the server socket and all its resources, but doesn\'t close the connected BluetoothSocket that\'s been returned by accept(). Unlike TCP/IP, RFCOMM allows only one connected client per channel at a time, so in most cases, it makes sense to call close() on the BluetoothServerSocket immediately after accepting a connected socket.\n
+Because the accept() call is a blocking call, it should not be executed in the main activity UI thread so that your application can still respond to other user interactions. It usually makes sense to do all work that involves a BluetoothServerSocket or BluetoothSocket in a new thread managed by your application. To abort a blocked call such as accept(), call close() on the BluetoothServerSocket or BluetoothSocket from another thread. Note that all methods on a BluetoothServerSocket or BluetoothSocket are thread-safe.\n</string>
+
+</resources>
